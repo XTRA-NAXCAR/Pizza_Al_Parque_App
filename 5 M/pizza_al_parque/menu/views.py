@@ -66,3 +66,19 @@ def delete_food (request, food_id, type_id):
         return redirect('description_types', type_id = type_id)
     else:
         return render(request, "foods/delete_food.html", {'food': food, 'type': type})
+ 
+def edit_food(request, food_id, type_id):
+    food = Food.objects.get(id=food_id)
+    type = Type.objects.get(id=type_id)
+    if request.method == "POST":
+        form = FoodForm(request.POST, instance=food)
+        if form.is_valid():
+            temp_form = form.save(commit=False)
+            temp_form.type_by = type
+            temp_form.save()
+
+            type_id = temp_form.type_by.id
+            return redirect(description_types, type_id = type_id)
+    else:
+        form = FoodForm(instance=food)
+    return render(request, "foods/edit_food.html", {"form": form, "type": type})
