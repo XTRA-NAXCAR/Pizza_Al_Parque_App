@@ -29,5 +29,6 @@ urlpatterns = [
     path('delete_type/<int:type_id>/', views.delete_type, name="delete_type"),
     path('description/<int:type_id>/', views.description_types, name="description_types"),
     path('charge_food/<int:type_id>/', views.charge_food, name="charge_food"),
-    path('delete_food/<int:food_id>/<int:type_id>/', views.delete_food, name="delete_food")
+    path('delete_food/<int:food_id>/<int:type_id>/', views.delete_food, name="delete_food"),
+    path('edit_food/<int:food_id>/<int:type_id>/', views.edit_food, name="edit_food"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
